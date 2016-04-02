@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTPlayerView.h"
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet YTPlayerView *playerView;
+@property (weak, nonatomic) IBOutlet UITextField *videoIdTextField;
+@property (weak, nonatomic) IBOutlet UITextField *startTimeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *endTimeTextField;
 
 @end
 
