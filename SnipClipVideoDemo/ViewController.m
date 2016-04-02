@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     isVideoPlaying = NO;
-    startTimeForVideo = 15;
+    startTimeForVideo = 10;
     endTimeForVideo = 50;
     NSDictionary *playerVars = @{
                                  @"playsinline" : @1,
@@ -47,13 +47,12 @@
 
 - (void)loadPieChartTimeConfiguration{
     callbackTimerForPie = (endTimeForVideo - startTimeForVideo) /100.0;
-    progressPerTimerCall = callbackTimerForPie ;
+    progressPerTimerCall = 0.1/(callbackTimerForPie*(endTimeForVideo - startTimeForVideo)) ;
 }
 
 - (void) increasePieTime:(id)sender{
-    
-    progress = progress +  progressPerTimerCall;
-    [pie setProgress:progress animated:YES];
+    progress = progress + progressPerTimerCall;
+    [pie setProgress:.5 animated:YES];
 }
 
 - (void)configureThePieView{

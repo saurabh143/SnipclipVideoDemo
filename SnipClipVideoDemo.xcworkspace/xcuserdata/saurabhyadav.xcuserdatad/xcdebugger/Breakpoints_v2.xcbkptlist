@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SnipClipVideoDemo/ViewController.m"
-            timestampString = "481327196.333142"
+            timestampString = "481328364.367459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "-increasePieTime:"
             landmarkType = "5">
          </BreakpointContent>
