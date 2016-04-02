@@ -20,6 +20,7 @@
     int endTimeForVideo;
     float callbackTimerForPie;
     float progressPerTimerCall;
+    NSString *videoIdForVideo;
 }
 
 @end
@@ -28,8 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     isVideoPlaying = NO;
-    startTimeForVideo = 10;
-    endTimeForVideo = 50;
+    startTimeForVideo = 108;
+    endTimeForVideo = 130;
+    videoIdForVideo = @"KIprTEhr9lE";
     NSDictionary *playerVars = @{
                                  @"playsinline" : @1,
                                  @"start" : [NSNumber numberWithInt:startTimeForVideo],
@@ -38,7 +40,7 @@
                                  @"rel":@0
                                  };
     
-    [self.playerView loadWithVideoId:@"xoZl_5UT4n4" playerVars:playerVars];
+    [self.playerView loadWithVideoId:videoIdForVideo playerVars:playerVars];
     self.playerView.delegate = self;
     [self configureThePieView];
     [self loadPieChartTimeConfiguration];
@@ -46,13 +48,15 @@
 }
 
 - (void)loadPieChartTimeConfiguration{
-    callbackTimerForPie = (endTimeForVideo - startTimeForVideo) /100.0;
-    progressPerTimerCall = 0.1/(callbackTimerForPie*(endTimeForVideo - startTimeForVideo)) ;
+    callbackTimerForPie = 0.2;
+    
+//    ;
+    progressPerTimerCall =  0.2/(endTimeForVideo - startTimeForVideo) ;
 }
-
 - (void) increasePieTime:(id)sender{
+    
     progress = progress + progressPerTimerCall;
-    [pie setProgress:.5 animated:YES];
+    [pie setProgress:progress animated:YES];
 }
 
 - (void)configureThePieView{
@@ -112,13 +116,38 @@
                                  @"controls": @0,
                                  @"rel":@0
                                  };
-    [self.playerView loadWithVideoId:@"xoZl_5UT4n4" playerVars:playerVars];
+    [self.playerView loadWithVideoId:videoIdForVideo playerVars:playerVars];
 }
 
 - (IBAction)loadVideoPressed:(id)sender {
-    if (self.videoIdTextField.text ==0 || self.startTimeTextField.text == 0 || self.endTimeTextField.text == 0) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Please fill all the required Fields" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
+    if (self.videoIdTextField.text.length ==0 || self.startTimeTextField.text.length == 0 || self.endTimeTextField.text.length == 0) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Alert"
+                                                                       message:@"Please fill all the fields."
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+    else{
+        progress = 0;
+        [pie setProgress:0 animated:YES];
+        int startTime = [self.startTimeTextField.text intValue];
+        int endTime = [self.endTimeTextField.text intValue];
+        startTimeForVideo = startTime;
+        endTimeForVideo = endTime;
+        videoIdForVideo = self.videoIdTextField.text;
+        NSDictionary *playerVars = @{
+                                     @"playsinline" : @1,
+                                     @"start" : [NSNumber numberWithInt:startTime],
+                                     @"end" : [NSNumber numberWithInt:endTime],
+                                     @"controls": @0,
+                                     @"rel":@0
+                                     };
+        [self.playerView loadWithVideoId:self.videoIdTextField.text playerVars:playerVars];
     }
 }
 
