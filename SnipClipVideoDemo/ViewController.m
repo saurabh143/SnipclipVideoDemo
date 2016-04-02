@@ -39,7 +39,6 @@
                                  @"controls": @0,
                                  @"rel":@0
                                  };
-    
     [self.playerView loadWithVideoId:videoIdForVideo playerVars:playerVars];
     self.playerView.delegate = self;
     [self configureThePieView];
@@ -49,12 +48,10 @@
 
 - (void)loadPieChartTimeConfiguration{
     callbackTimerForPie = 0.2;
-    
-//    ;
     progressPerTimerCall =  0.2/(endTimeForVideo - startTimeForVideo) ;
 }
+
 - (void) increasePieTime:(id)sender{
-    
     progress = progress + progressPerTimerCall;
     [pie setProgress:progress animated:YES];
 }
@@ -131,7 +128,6 @@
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
     else{
         progress = 0;
         [pie setProgress:0 animated:YES];
